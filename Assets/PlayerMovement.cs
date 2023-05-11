@@ -7,7 +7,7 @@ public class PlayerMovement : MonoBehaviour
     public CharacterController charCon;
     public float speed;
     Vector3 velocity, vmovement;
-    public GameObject cam;
+    public GameObject cam, panel;
     // Start is called before the first frame update
     void Start()
     {
@@ -46,7 +46,24 @@ public class PlayerMovement : MonoBehaviour
         charCon.transform.Rotate(Vector3.up * x * (120f * Time.deltaTime));
         charCon.Move(vmovement * speed * Time.deltaTime);
 
-        velocity.y += -3f * Time.deltaTime;
+        if (charCon.isGrounded)
+        {
+            velocity.y = -1.0f;
+        }
+        else
+        {
+            velocity.y += -9.8f * Time.deltaTime;
+
+        }
         charCon.Move(velocity * Time.deltaTime);
+
+        if (transform.position.y < -30)
+        {
+            print("Ping");
+            panel.SetActive(true);
+            Time.timeScale = 0;
+        }
     }
+
+    
 }
