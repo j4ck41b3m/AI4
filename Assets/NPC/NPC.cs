@@ -64,10 +64,10 @@ public class NPC : MonoBehaviour
         #endregion
 
         destino = GameObject.FindGameObjectWithTag("Player").transform.position;
-        if (Vector3.Distance(transform.position, destino) < 1f)
+        if (Vector3.Distance(transform.position, destino) < 1.2f)
         {
-            panel.SetActive(true);
-            Time.timeScale = 0;
+           panel.SetActive(true);
+           Time.timeScale = 0;
         }
         GetComponent<NavMeshAgent>().SetDestination(destino);
     }
