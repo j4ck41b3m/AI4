@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
+
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -8,16 +11,33 @@ public class PlayerMovement : MonoBehaviour
     public float speed;
     Vector3 velocity, vmovement;
     public GameObject cam, panel;
+    public TextMeshProUGUI timer;
+    public float clock;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
+    {
+
+    }
+    private void Update()
     {
         
     }
-
     // Update is called once per frame
+
+    void Clocking()
+    {
+            float minutes = Mathf.FloorToInt(clock / 60);
+            float seconds = Mathf.FloorToInt(clock % 60);
+            timer.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+        
+        
+    }
     void FixedUpdate()
     {
-       cam. transform.position = new Vector3(transform.position.x, cam.transform.position.y, transform.position.z - 8);
+        clock += Time.deltaTime;
+        Clocking();
+
+        cam. transform.position = new Vector3(transform.position.x, transform.position.y + 12.25f, transform.position.z - 8);
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
         if (z != 0)
@@ -57,7 +77,7 @@ public class PlayerMovement : MonoBehaviour
         }
         charCon.Move(velocity * Time.deltaTime);
 
-        if (transform.position.y < -30)
+        if (transform.position.y < -20)
         {
             print("Ping");
             panel.SetActive(true);
