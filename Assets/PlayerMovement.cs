@@ -42,7 +42,7 @@ public class PlayerMovement : MonoBehaviour
         float z = Input.GetAxis("Vertical");
         if (z != 0)
         {
-            if (speed < 20)
+            if (speed < 22)
             {
                 speed = (speed + Time.deltaTime * 10);
 
